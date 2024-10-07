@@ -33,6 +33,7 @@ public class FormalGrammar {
     // Verifica si una producción es válida asegurando que la producción contiene como máximo un no terminal
     public boolean isValidProduction(Production production) {
         if (!nonTerminals.contains(production.getLhs())) return false; // El lado izquierdo debe ser no terminal
+
         int nonTerminalCount = 0;
         for (char symbol : production.getRhs().toCharArray()) {
             String symStr = String.valueOf(symbol);
@@ -76,7 +77,7 @@ public class FormalGrammar {
 
     // Genera los hijos de un nodo en el árbol
     private void generateChildrenNodes(DerivationTree node, int depth) {
-        if (depth >= 4) return; // Limita la profundidad del árbol
+        if (depth >= 6) return; // Limita la profundidad del árbol
 
         String nonTerminal = findFirstNonTerminal(node.getName());
         if (nonTerminal != null) {
@@ -138,11 +139,16 @@ public class FormalGrammar {
         return false;
     }
 
+    // Método para agregar una producción a la lista de reglas de producción.
     public void addProduction(Production production) {
+        // Añade el objeto 'production' a la lista 'productionRules'.
         productionRules.add(production);
     }
 
-    public boolean deleteProduction(Production production){
+    // Método para eliminar una producción de la lista de reglas de producción.
+    public boolean deleteProduction(Production production) {
+        // Intenta eliminar el objeto 'production' de la lista 'productionRules'.
+        // Retorna 'true' si se eliminó exitosamente, o 'false' si la producción no estaba en la lista.
         return productionRules.remove(production);
     }
 
